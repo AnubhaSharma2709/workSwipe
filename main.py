@@ -3,10 +3,10 @@ from langchain.chat_models import ChatOpenAI
 from langchain.chains import LLMChain 
 from third_parties.linkedin import scrape_linkedin_profile
 import os 
+from agents.linkedin_lookup import lookup as linkedin_lookup_agent 
 
-information ="""
-When Modi was eight years old, he was introduced to the Rashtriya Swayamsevak Sangh (RSS) and began attending its local shakhas (training sessions). There, he met Lakshmanrao Inamdar, who inducted Modi as a balswayamsevak (junior cadet) in the RSS and became his political mentor.[51] While Modi was training with the RSS, he also met Vasant Gajendragadkar and Nathalal Jaghda, Bharatiya Jana Sangh leaders who in 1980 helped found the BJP's Gujarat unit.[52]"
-"""
+
+information =" "
 if __name__ == '__main__':
     print("Hello World")
 
@@ -27,7 +27,7 @@ if __name__ == '__main__':
         llm=llm,
         prompt=summary_prompt_template
     )
+    linkedin_profile_url= linkedin_lookup_agent(name="divyanshu-rana-792a03223")
+    linkedin_data = scrape_linkedin_profile(profile_url= linkedin_profile_url)
     
-    linkedin_data = scrape_linkedin_profile(profile_url="https://www.linkedin.com/in/divyanshu-rana-792a03223/")
-    
-    print(chain.run(information= linkedin_data ))
+    print(chain.run(information= linkedin_data))
