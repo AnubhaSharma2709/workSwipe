@@ -11,7 +11,34 @@ if __name__ == '__main__':
     print("Hello World")
 
     summary_template = """
-    I want you to create a short summary of the given information {information}
+    Given the LinkedIn Information{information} about [User's Name], I want you to create the following summary:
+1. **Profile Summary:**
+   - [User's LinkedIn summary]
+
+2. **Interesting Topics:**
+   - Based on the user's LinkedIn activity, the following topics seem to be of interest:
+     - [Topic 1]
+     - [Topic 2]
+     - [Topic 3]
+
+3. **Number of Posts Liked - Showing Activities on LinkedIn:**
+   - Total Posts Liked: [Number of posts liked]
+   - Posts Commented On: [Number of posts commented on]
+   - Posts Shared: [Number of posts shared]
+   - Post Likes Over Time: [A time series graph showing post likes over time]
+
+4. **Profile Information:**
+   - Name: [User's Name]
+   - Current Position: [User's current position]
+   - Location: [User's location]
+   - Connections: [Number of connections]
+   - Industry: [User's industry]
+   - Recommendations: [Number of recommendations]
+   - Total Posts: [Number of total posts]
+   - Followers: [Number of followers]
+   - Connections:[Number of Connections]
+
+You can also include additional numerical data or sections as needed based on the specific information avail
     """
     
     summary_prompt_template = PromptTemplate(
