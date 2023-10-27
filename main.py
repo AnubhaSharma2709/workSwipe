@@ -4,14 +4,11 @@ from langchain.chains import LLMChain
 from third_parties.linkedin import scrape_linkedin_profile
 import os 
 from agents.linkedin_lookup import lookup as linkedin_lookup_agent 
-
-
-information =" "
-if __name__ == '__main__':
-    print("Hello World")
-
+from output_parse import person_intel_parser , PersonIntel
+def ice_break(name: str)-> PersonIntel:
     summary_template = """
     Given the LinkedIn Information{information} about [User's Name], I want you to create the following summary:
+    
 1. **Profile Summary:**
    - [User's LinkedIn summary]
 
@@ -37,12 +34,15 @@ if __name__ == '__main__':
    - Total Posts: [Number of total posts]
    - Followers: [Number of followers]
    - Connections:[Number of Connections]
-
-You can also include additional numerical data or sections as needed based on the specific information avail
+   \n{format_instructions}
     """
     
     summary_prompt_template = PromptTemplate(
-        input_variables=["information"], template=summary_template
+        input_variables=["information"], 
+        template=summary_template,
+        partial_variables={
+            "format_instructions": person_intel_parser.get_.format_instructions()
+            }
     )
     
     llm = ChatOpenAI(
@@ -54,7 +54,15 @@ You can also include additional numerical data or sections as needed based on th
         llm=llm,
         prompt=summary_prompt_template
     )
-    linkedin_profile_url= linkedin_lookup_agent(name="divyanshu-rana-792a03223")
+    linkedin_profile_url= linkedin_lookup_agent(name=name)
     linkedin_data = scrape_linkedin_profile(profile_url= linkedin_profile_url)
     
-    print(chain.run(information= linkedin_data))
+    results=chain.run(information = linkedin_data)
+    return person_intel_parser.parse(results)
+
+
+if __name__ == '__main__':
+    print("Hello World!")
+    results = ice_break(name ="dr-shalini-sharma-24450914")
+
+    
