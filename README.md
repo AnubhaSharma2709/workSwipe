@@ -4,7 +4,7 @@
 **LinkedIn Profile Summary Generator**
 
 **Status:** Ongoing
-
+![Alt text](https://drive.google.com/file/d/1yzqPSLa8W_rD-JzRGpw5RKT8QNKPmpFZ/view?usp=sharing)
 ## Project Overview
 LinkedIn Profile Summary Generator is an ongoing project that utilizes OpenAI's GPT-3.5 Turbo to create detailed LinkedIn profile summaries. This tool aims to extract information from LinkedIn profiles, generate personalized LinkedIn summaries, and provide insights into a user's LinkedIn activity. Here's an overview of the project:
 ## About
